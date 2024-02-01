@@ -40,26 +40,39 @@ const App = () => {
   const sortedBooks = sortBooks();
 
   return (
-    <div>
-         <label>
-        Sort by:
-        <select value={sortBy} onChange={(e)=>setSortBy(e.target.value)}>
-          <option value="">Select</option>
+    <>
+    <h1>Books List</h1>
+         <label htmlFor="Order">
+        sort by:
+        <select value={sortBy} onChange={(e)=>setSortBy(e.target.value)} id="Order">
           <option value="title">Title</option>
           <option value="author">Author</option>
           <option value="publisher">Publisher</option>
         </select>
       </label>
 
-      <ul>
+      <table>
+      <thead>
+        <td><strong>Title:</strong></td>
+        <td><strong>Author:</strong></td>
+        <td><strong>Publisher:</strong></td>
+      </thead>
+      
         {sortedBooks.map((book) => (
-          <li key={book.id}>
-            <strong>Title:</strong> {book.volumeInfo.title}, <strong>Author:</strong> {book.volumeInfo.authors[0]}, <strong>Publisher:</strong>{' '}
+          <tr>
+            <td key={book.id}>
+            {book.volumeInfo.title}
+          </td>
+          <td>
+          {book.volumeInfo.authors[0]}
+          </td>
+          <td>
             {book.volumeInfo.publisher}
-          </li>
+          </td>
+          </tr>         
         ))}
-      </ul>
-    </div>
+      </table>
+    </>
   )
 }
 
