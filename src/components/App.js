@@ -26,14 +26,12 @@ const App = () => {
 
   const sortBooks = () => {
     switch (sortBy) {
-      case 'title':
-        return [...books].sort((a, b) => a.volumeInfo.title.localeCompare(b.volumeInfo.title));
       case 'author':
         return [...books].sort((a, b) => a.volumeInfo.authors[0].localeCompare(b.volumeInfo.authors[0]));
       case 'publisher':
         return [...books].sort((a, b) => a.volumeInfo.publisher.localeCompare(b.volumeInfo.publisher));
-      default:
-        return books;
+        default:
+          return [...books].sort((a, b) => a.volumeInfo.title.localeCompare(b.volumeInfo.title));
     }
   };
 
@@ -42,7 +40,7 @@ const App = () => {
   return (
     <>
     <h1>Books List</h1>
-         <label htmlFor="Order">
+         <label htmlFor="Order">Order
         sort by:
         <select value={sortBy} onChange={(e)=>setSortBy(e.target.value)} id="Order">
           <option value="title">Title</option>
@@ -53,9 +51,9 @@ const App = () => {
 
       <table>
       <thead>
-        <td><strong>Title:</strong></td>
-        <td><strong>Author:</strong></td>
-        <td><strong>Publisher:</strong></td>
+        <th>Title:</th>
+        <th>Author:</th>
+        <th>Publisher:</th>
       </thead>
       
         {sortedBooks.map((book) => (
